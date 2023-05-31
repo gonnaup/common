@@ -34,7 +34,7 @@ public record Result<T>(T data, String code, String message) {
      */
     enum Code {
 
-        Success("200", "success"),
+        Success("0", "ok"),
         Fail("400", "fail");
 
         private final String code;
