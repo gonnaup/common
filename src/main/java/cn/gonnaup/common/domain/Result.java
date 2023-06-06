@@ -48,6 +48,15 @@ public record Result<T>(T data, String code, String message) {
         return new Result<>("", Code.Fail.code, reason);
     }
 
+    /**
+     * 未登陆或权限不够
+     *
+     * @return
+     */
+    public static Result<String> unAuthorized() {
+        return new Result<>("", Code.Unauthorized.code, Code.Unauthorized.description);
+    }
+
 
     /**
      * 返回码，待完善
@@ -55,8 +64,8 @@ public record Result<T>(T data, String code, String message) {
     enum Code {
 
         Success("0", "ok"),
-        Fail("400", "fail");
-
+        Fail("400", "fail"),
+        Unauthorized("401", "unauthentication or unauthorized");
         private final String code;
 
         private final String description;
