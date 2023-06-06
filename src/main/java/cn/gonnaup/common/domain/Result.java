@@ -20,6 +20,25 @@ public record Result<T>(T data, String code, String message) {
     }
 
     /**
+     * 只表明请求成功
+     *
+     * @return
+     */
+    public static Result<String> ok() {
+        return new Result<>("", Code.Success.code, Code.Success.description);
+    }
+
+    /**
+     * 表明成功且带返回消息
+     *
+     * @param message 成功提示信息
+     * @return
+     */
+    public static Result<String> okWithmessage(String message) {
+        return new Result<>("", Code.Success.code, message);
+    }
+
+    /**
      * 请求失败时返回结果
      *
      * @param reason 失败原因
@@ -28,6 +47,7 @@ public record Result<T>(T data, String code, String message) {
     public static Result<String> fail(String reason) {
         return new Result<>("", Code.Fail.code, reason);
     }
+
 
     /**
      * 返回码，待完善
@@ -52,6 +72,38 @@ public record Result<T>(T data, String code, String message) {
 
         public String description() {
             return description;
+        }
+    }
+
+    public static final class ResultBuilder<T> {
+        private T data;
+        private String code;
+        private String message;
+
+        private ResultBuilder() {
+        }
+
+        public static <T> ResultBuilder<T> aResult() {
+            return new ResultBuilder<>();
+        }
+
+        public ResultBuilder<T> withData(T data) {
+            this.data = data;
+            return this;
+        }
+
+        public ResultBuilder<T> withCode(String code) {
+            this.code = code;
+            return this;
+        }
+
+        public ResultBuilder<T> withMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public Result<T> build() {
+            return new Result<>(data, code, message);
         }
     }
 }
