@@ -1,4 +1,4 @@
-package cn.gonnaup.common.domain;
+package org.gonnaup.common.domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

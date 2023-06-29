@@ -1,4 +1,4 @@
-package cn.gonnaup.common.domain;
+package org.gonnaup.common.domain;
 
 /**
  * 公共返回模型
