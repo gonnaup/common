@@ -1,6 +1,8 @@
 package org.gonnaup.common.util;
 
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * 字符串工具类
@@ -68,6 +70,22 @@ public abstract class StringUtil {
             sb.append(String.valueOf(padChar).repeat(minLength - string.length()));
             return sb.toString();
         }
+    }
+
+    /**
+     * 当source执行结果不为null和空串时，执行target函数
+     *
+     * @param target 消费者
+     * @param source 提供者
+     * @return 是否执行了target函数
+     */
+    public static boolean acceptWhenNotBlank(Consumer<String> target, Supplier<String> source) {
+        String s = source.get();
+        if (isNotBlank(s)) {
+            target.accept(s);
+            return true;
+        }
+        return false;
     }
 
 }

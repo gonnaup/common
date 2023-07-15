@@ -2,6 +2,9 @@ package org.gonnaup.common.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -31,5 +34,14 @@ class StringUtilTest {
         String padEnd = StringUtil.padEnd(s, padLength, '0');
         assertTrue(padEnd.endsWith("0".repeat(padLength - len)));
         assertEquals(padLength, padEnd.length());
+
+        List<String> list = new ArrayList<>();
+        String s1 = "BBB";
+        StringUtil.acceptWhenNotBlank(list::add, () -> s1);
+        assertEquals(1, list.size());
+        list.clear();
+        StringUtil.acceptWhenNotBlank(list::add, () -> null);
+        assertEquals(0, list.size());
+
     }
 }
