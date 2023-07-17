@@ -30,6 +30,42 @@ public abstract class RandomUtil {
      * @return 随机字符串
      */
     public static String randomStringWithPrefix(int count, String prefix) {
+        return randomStringWithPrefixBeginEnd(count, prefix, 0, DICT.length);
+    }
+
+    /**
+     * 生成固定长度并带前缀(不计入长度)的随机字符串，包含a~z,A~Z
+     *
+     * @param count 字符串长度
+     * @return 随机字符串
+     */
+    public static String randomAlphabet(int count) {
+        return randomAlphabetWithPrefix(count, null);
+    }
+
+    /**
+     * 生成固定长度并带前缀(不计入长度)的随机字符串，包含a~z,A~Z
+     *
+     * @param count  字符串长度
+     * @param prefix 字符串前缀，为null或空时为无前缀模式
+     * @return 随机字符串
+     */
+    public static String randomAlphabetWithPrefix(int count, String prefix) {
+        return randomStringWithPrefixBeginEnd(count, prefix, 10, DICT.length);
+    }
+
+    /**
+     * 生成固定长度并带前缀(不计入长度)的随机字符串
+     * <p>
+     * 字符串由 {@link RandomUtil#DICT} 在索引 [beginIndex, endIndex) 范围内的字符组成
+     *
+     * @param count      字符串长度，不包括前缀
+     * @param prefix     字符串前缀
+     * @param beginIndex DICT开始索引（包括）
+     * @param endIndex   DICT结束索引（不包括）
+     * @return 随机字符串
+     */
+    private static String randomStringWithPrefixBeginEnd(int count, String prefix, int beginIndex, int endIndex) {
         if (count <= 0) {
             throw new IllegalArgumentException("字符串长度必须大于0");
         }
@@ -41,9 +77,8 @@ public abstract class RandomUtil {
             builder = new StringBuilder(prefix);
         }
 
-        int begin = 0, end = DICT.length;
         for (int i = 0; i < count; i++) {
-            int randomIndex = RandomHolder.HOLDER.random.nextInt(begin, end);
+            int randomIndex = RandomHolder.HOLDER.random.nextInt(beginIndex, endIndex);
             builder.append(DICT[randomIndex]);
         }
         return builder.toString();

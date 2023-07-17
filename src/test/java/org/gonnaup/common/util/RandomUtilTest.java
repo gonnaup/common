@@ -20,6 +20,17 @@ class RandomUtilTest {
         String s1 = RandomUtil.randomStringWithPrefix(88, prefix);
         Assertions.assertEquals(88 + prefix.length(), s1.length());
         Assertions.assertTrue(s1.startsWith(prefix));
+
+        for (int i = 0; i < 100; i++) {
+            String s2 = RandomUtil.randomAlphabet(93);
+            Assertions.assertTrue(s2.matches("^[a-zA-Z]{93}$"));
+        }
+
+        for (int i = 0; i < 100; i++) {
+            String s3 = RandomUtil.randomAlphabetWithPrefix(57, prefix);
+            Assertions.assertTrue(s3.matches("^ABC_[a-zA-Z]{57}$"));
+        }
+
     }
 
 }
