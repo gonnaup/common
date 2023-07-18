@@ -43,5 +43,13 @@ class StringUtilTest {
         StringUtil.acceptWhenNotBlank(list::add, () -> null);
         assertEquals(0, list.size());
 
+        List<String> l = new ArrayList<>();
+        String s2 = "BBB";
+        StringUtil.acceptWhenNullOrBlank(l::add, s2, () -> null);
+        assertEquals(1, l.size());
+        l.clear();
+        StringUtil.acceptWhenNullOrBlank(l::add, s2, () -> "null");
+        assertEquals(0, l.size());
+
     }
 }

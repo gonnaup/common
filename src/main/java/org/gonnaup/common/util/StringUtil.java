@@ -80,9 +80,32 @@ public abstract class StringUtil {
      * @return 是否执行了target函数
      */
     public static boolean acceptWhenNotBlank(Consumer<String> target, Supplier<String> source) {
+        Objects.requireNonNull(target);
+        Objects.requireNonNull(source);
         String s = source.get();
         if (isNotBlank(s)) {
             target.accept(s);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 当predicate提供的值为null OR blank时，执行target函数，参数为value
+     *
+     * @param target
+     * @param value
+     * @param predicate
+     * @return 执行了target返回true，未执行返回false
+     */
+    public static boolean acceptWhenNullOrBlank(Consumer<String> target, String value, Supplier<String> predicate) {
+        Objects.requireNonNull(target);
+        Objects.requireNonNull(predicate);
+        if (isNullOrBlank(value)) {
+            throw new IllegalArgumentException("value can't be null or blank!");
+        }
+        if (isNullOrBlank(predicate.get())) {
+            target.accept(value);
             return true;
         }
         return false;
