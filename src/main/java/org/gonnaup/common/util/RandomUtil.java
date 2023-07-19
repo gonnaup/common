@@ -13,6 +13,16 @@ public abstract class RandomUtil {
     private static final char[] DICT = "0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM".toCharArray();
 
     /**
+     * 生成收集数字字符串
+     *
+     * @param count 长度
+     * @return 数字字符串
+     */
+    public static String randomNumbericString(int count) {
+        return randomStringWithPrefixBeginEnd(count, null, 0, 10);
+    }
+
+    /**
      * 生成固定长度的随机字符串，包含0～9,a~z,A~Z
      *
      * @param count 字符串长度

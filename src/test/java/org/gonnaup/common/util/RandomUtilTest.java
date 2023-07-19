@@ -31,6 +31,11 @@ class RandomUtilTest {
             Assertions.assertTrue(s3.matches("^ABC_[a-zA-Z]{57}$"));
         }
 
+        for (int i = 0; i < 100; i++) {
+            String s4 = RandomUtil.randomNumbericString(35);
+            Assertions.assertTrue(s4.matches("^[0-9]{35}$"));
+        }
+
     }
 
 }
